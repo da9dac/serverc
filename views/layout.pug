@@ -1,0 +1,65 @@
+doctype
+html
+  head
+    meta(charset='UTF-8')
+    title= title
+    meta(name='viewport' content='width=device-width, user-scalable=no')
+    meta(http-equiv='X-UA-Compatible' content='IE=edge')
+    link(rel='stylesheet' href='/main.css')
+    link(rel='stylesheet' href='/autocomplete.css')
+    link(rel='stylesheet' href='fullcalendar/main.css')
+    script(type="text/javascript" src='js/auto.js')
+    script(type="text/javascript" src='js/list.js')
+    script(type="text/javascript" src='js/roll.js')
+    script(type="text/javascript" src='fullcalendar/main.js')
+    link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
+    script(src='https://code.jquery.com/jquery-3.6.0.min.js' integrity='sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=' crossorigin='anonymous')
+    script.
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          googleCalendarApiKey: 'AIzaSyBaZsXvzqjnTqvRMec6BjYPJ6VGUzKB4wE',
+          eventSources: [
+            {
+              googleCalendarId: 'amq8pktc5ccofd65eao6u4lefs@group.calendar.google.com',
+              className: '가톨릭관동대학교 학사일정',
+              color: '#be5683', //rgb,#ffffff 등의 형식으로 할 수 있어요.
+              //textColor: 'black' 
+            }
+          ]
+        });
+      calendar.render();
+      });
+  body
+    .container
+      p
+      .twit
+        .head-logo
+          .logo-img
+            a(href='https://www.cku.ac.kr/sites/cku/index.do' target='_blank')
+              img(src='images/logo.png' alt='홈으로')
+      .profile-wrap
+        .profile
+          if user && user.id
+            .user-name= '안녕하세요! ' + user.nick + '님'
+            p  
+            input#my-id(type='hidden' value=user.id)
+            a#home.btn(href='/') 홈으로
+            a 
+            a#my-profile.btn(href='/profile') 마이페이지
+            a 
+            a#logout.btn(href='/auth/logout') 로그아웃
+            p 
+          else
+            form#login-form(action='/auth/login' method='post')
+              .input-group
+                label(for='id') 학생번호
+                input#email(type='text' name='id' placeholder='학생번호' required autofocus)
+              .input-group
+                label(for='password') 비밀번호
+                input#password(type='password' name='password' placeholder='생년월일 6자리' required)
+              if loginError
+                .error-message= loginError
+              a#join.btn(href='/join') 데이터넣기
+              button#login.btn(type='submit') 로그인
+      block content

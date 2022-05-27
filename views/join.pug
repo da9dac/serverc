@@ -1,0 +1,44 @@
+extends layout
+
+block content
+  .timeline
+    form#join-form(action='/auth/join' method='post')
+      .input-group
+        label(for='join-email') 학생번호
+        input#join-email(type='text' name='email')
+      .input-group
+        label(for='join-nick') 이름
+        input#join-nick(type='text' name='nick')
+      .input-group
+        label(for='join-password') 비밀번호
+        input#join-password(type='password' name='password')
+      .input-group
+        label(for='join-dnick') 학과명
+        input#join-email(type='text' name='dnick')
+      .input-group
+        label(for='join-dcategory') 학과분류
+        input#join-nick(type='text' name='dcategory')
+      .input-group
+        label(for='join-grade') 학년
+        input#join-password(type='text' name='grade')
+      .input-group
+        label(for='join-uyear') 입학연도
+        input#join-email(type='text' name='uyear')
+      .input-group
+        label(for='join-ascore') 교필
+        input#join-nick(type='text' name='ascore')
+      .input-group
+        label(for='join-bscore') 교선
+        input#join-password(type='text' name='bscore')
+      .input-group
+        label(for='join-cscore') 전공
+        input#join-email(type='text' name='cscore')
+      .input-group
+        label(for='join-dscore') 일반
+        input#join-nick(type='text' name='dscore')
+      .input-group
+        label(for='join-escore') 총학점
+        input#join-password(type='text' name='escore')
+      if joinError
+        .error-message= joinError
+      button#join-btn.btn(type='submit') 저장
